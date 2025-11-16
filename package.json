@@ -1,0 +1,81 @@
+{
+  "name": "git-commit-generator",
+  "displayName": "Git Commit Message Generator",
+  "description": "Generate conventional commit messages using AI based on staged changes",
+  "version": "1.0.0",
+  "publisher": "itaimelnik",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "SCM Providers",
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:gitCommentGenerator.generateCommitMessage"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "gitCommentGenerator.generateCommitMessage",
+        "title": "Generate Commit Message",
+        "icon": "$(sparkle)"
+      },
+      {
+        "command": "gitCommentGenerator.changeApiKey",
+        "title": "Git Commit Generator: Change API Key"
+      },
+      {
+        "command": "gitCommentGenerator.resetApiKey",
+        "title": "Git Commit Generator: Reset API Key"
+      }
+    ],
+    "menus": {
+      "scm/title": [
+        {
+          "command": "gitCommentGenerator.generateCommitMessage",
+          "group": "navigation",
+          "when": "scmProvider == git"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Git Commit Generator",
+      "properties": {
+        "gitCommentGenerator.apiProvider": {
+          "type": "string",
+          "enum": ["openai", "gemini"],
+          "default": "openai",
+          "description": "The AI provider to use for generating commit messages"
+        },
+        "gitCommentGenerator.model": {
+          "type": "string",
+          "default": "gpt-3.5-turbo",
+          "description": "The model to use (e.g., gpt-3.5-turbo, gpt-4, gemini-pro)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.x",
+    "@typescript-eslint/parser": "^6.x",
+    "eslint": "^8.x",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "openai": "^4.20.0",
+    "@google/generative-ai": "^0.1.3"
+  }
+}
+
