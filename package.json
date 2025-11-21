@@ -19,8 +19,8 @@
     "commands": [
       {
         "command": "gitCommentGenerator.generateCommitMessage",
-        "title": "Generate Commit Message",
-        "icon": "$(sparkle)"
+        "title": "Generate Commit Message (My extension)",
+        "icon": "$(comment)"     
       },
       {
         "command": "gitCommentGenerator.changeApiKey",
